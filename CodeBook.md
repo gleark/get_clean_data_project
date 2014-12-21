@@ -5,33 +5,11 @@
 
 Source for raw data is: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-After unzipping downloaded file the data directory sturcture should look something like this:
+After unzipping downloaded zip file the data directory sturcture should reside as a sub-folder named 
+**/UCI HAR Dataset/** inside the project directory. If located elsewhere you will need to edit data path 
+variable as noted in ReadMe
 
-README.txt included in zip file has complete description of raw dataset.
-
-A summary view fo the raw dataset file structure:  
-/UCI HAR Dataset  
-|--activity_labels.txt : Links the class labels with their activity name.  
-|--features.txt        : List of all features.  
-|--features_info.txt   : Shows information about the variables used on the feature vector.  
-|--README.txt          : detailed description of raw dataset   
-|--/test               : test dataset containes 30% of subject data  
-|--/train              : train dataset containes 70% of subject data  
-
--- test/train :test/train sub-directory structures are equivelent  
-   |--subject_test/train.txt    : Each row identifies the subject who performed the activity  
-                                       for each window sample. Range is from 1 to 30.   
-   |--X_test/train.txt          : test data - each row contains 561-feature vector with time   
-                                       and frequency domain variables  
-   |--y_test/train.txt          : activity ID for each row   
-   |--/Inertial Siginals        : Sub-directory with raw signal data  
-       |--total_acc_x\y\z_test\train.txt  :The acceleration signal from the smartphone accelerometer  
-                                          X,Y,Z axis in standard gravity units 'g'.   
-                                          Every row shows a 128 element vector.  
-       |--body_gyro_x\y\z_test\train.txt  :The angular velocity vector measured by the gyroscope   
-                                              for each window sample. The units are radians/second.  
-       |--body_acc_x\y\z_test\train.txt   : The body acceleration signal obtained by subtracting   
-                                              the gravity from the total acceleration.   
+The file **/UCI HAR Dataset/README.txt** included in zip file has complete description of raw dataset.
 
 ## Final dataset
 Output file is **summary_average_results.txt** which contains the mean value of 66 selected features extracted from
