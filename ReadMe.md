@@ -14,7 +14,7 @@ Default input directory and output file name are defined at the top of script fi
 ```{r}
 ## GLOBALS
 DataDirPath   <- "./UCI HAR Dataset/"
-finalOutputFileName <- "summary\_average\_results.txt"
+finalOutputFileName <- "summary_average_results.txt"
 ```
 
 ### Project Summary

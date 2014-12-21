@@ -28,11 +28,11 @@ colnames(activies)     <- c('activityID','activityType');
 
 colnames(subjectTest)  <- "subjectID";
 colnames(xTest)        <- features[,2]; 
-colnames(yTest)        <- "activityId";
+colnames(yTest)        <- "activityID";
 
 colnames(subjectTrain) <- "subjectID";
 colnames(xTrain)       <- features[,2]; 
-colnames(yTrain)       <- "activityId";
+colnames(yTrain)       <- "activityID";
 
 ## MERGE  -------------------------------------------------------------------
 # test + train -> complete
@@ -42,17 +42,19 @@ trainData <- cbind(subjectTrain, yTrain, xTrain)
 # append test/train datasets together
 completeData = rbind(testData,trainData)
 
-
 # clean-up intermediate vars
-rm(subjectTest, subjectTrain, xTest, xTrain, yTest, yTrain, testData, trainData, features)
+#rm(subjectTest, subjectTrain, xTest, xTrain, yTest, yTrain, testData, trainData, features)
 
 ## CLEAN-UP COLUMN LABELS   ---------------------------------------------------
-# extract mean and std(standard deviation) for each feature
+# extract subjectID, activityID, mean and std(standard deviation) for each feature
 colNames  <- colnames(completeData)
 
 meanColIndexs <- grep("mean\\(\\)", colNames, ignore.case=FALSE)
-sdevColIndexs <- grep("std()" , colNames, ignore.case=FALSE)
-keeps <- sort(union(meanColIndexs, sdevColIndexs))
+sdevColIndexs <- grep("std()", colNames, ignore.case=FALSE)
+subjectCol    <- grep("subjectID", colNames, ignore.case=FALSE)
+activityCol   <- grep("activityID",colNames, ignore.case=FALSE)
+
+keeps <- sort(union(union(subjectCol, activityCol), union(meanColIndexs, sdevColIndexs)))
 completeData <- completeData[,keeps]
 
 #clean up column labels
@@ -74,7 +76,9 @@ colNames <- gsub(pattern = "-Z",  replacement = ".Z", x = colNames)
 # apply edited colNames to dataset
 colnames(completeData) <- colNames
 
-avgACtivities <- sapply(X = completeData, FUN = mean, simplify = TRUE)
+avgACtivities <- sapply(X = completeData[,!names(completeData) %in% c("subjectID","activityID")]
+                        , FUN = mean
+                        , simplify = TRUE)
 
 ## OUTPUT TIDY DATASET   -------------------------------------------------------------------
 # write summary averages out to txt file
